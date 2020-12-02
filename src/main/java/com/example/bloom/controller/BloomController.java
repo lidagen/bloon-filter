@@ -24,8 +24,5 @@ public class BloomController {
         return userById;
     }
 
-    @RequestMapping(value = "/preheating", method = RequestMethod.POST)
-    public void preheating() {
-        userService.getAll();
-    }
+
 }

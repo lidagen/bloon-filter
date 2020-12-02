@@ -2,6 +2,7 @@ package com.example.bloom.service;
 
 import com.example.bloom.bean.User;
 import com.example.bloom.bloom.BloomFilterHelper;
+import com.example.bloom.config.DatePreheating;
 import com.example.bloom.service.db.UserDB;
 import com.example.bloom.util.RedisServiceUtil;
 import com.google.common.collect.Lists;
@@ -27,21 +28,6 @@ public class UserService {
     private RedisServiceUtil redisServiceUtil;
     @Autowired
     private BloomFilterHelper bloomFilterHelper;
-
-
-    public List<User> getAll() {
-        List<User> users = redisTemplate.boundHashOps("id").values();
-        if (CollectionUtils.isEmpty(users)) {
-            users = UserDB.USER_LIST;
-            for (User user : users) {
-                //加入redis
-                redisTemplate.boundHashOps(KEY).put(user.getId(), user);
-                //加入布隆
-                redisServiceUtil.addByBloomFilter(bloomFilterHelper, "bloom", String.valueOf(user.getId()));
-            }
-        }
-        return users;
-    }
 
 
     public User getUserById(Long id) {
