@@ -1,10 +1,13 @@
 package com.example.bloom.config;
 
 import com.example.bloom.bean.User;
+import com.example.bloom.bloom.BloomFilterHelper;
 import com.example.bloom.service.UserService;
+import com.example.bloom.util.RedisServiceUtil;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,9 +20,14 @@ import java.util.List;
 @Component
 public class DatePreheating implements InitializingBean {
     @Autowired
-    private UserService userService;
+    private BloomFilterHelper bloomFilterHelper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     public static List<User> USER_LIST;
+    @Autowired
+    private RedisServiceUtil redisServiceUtil;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -32,6 +40,7 @@ public class DatePreheating implements InitializingBean {
             User u = new User();
             u.setId(Long.valueOf(i));
             u.setName("ws:" + u.getId());
+            redisServiceUtil.addByBloomFilter(bloomFilterHelper, "bloom", String.valueOf(u.getId()));
             list.add(u);
         }
         return list;
