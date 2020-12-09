@@ -1,17 +1,13 @@
 package com.example.bloom.service;
 
 import com.example.bloom.bean.User;
-import com.example.bloom.bloom.BloomFilterHelper;
-import com.example.bloom.config.DatePreheating;
 import com.example.bloom.service.db.UserDB;
-import com.example.bloom.util.RedisServiceUtil;
-import com.google.common.collect.Lists;
+import com.pri.tool.commonredis.bloom.BloomFilterHelper;
+import com.pri.tool.commonredis.bloom.RedisBloomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,7 +21,7 @@ public class UserService {
     @Autowired
     private RedisTemplate redisTemplate;
     @Autowired
-    private RedisServiceUtil redisServiceUtil;
+    private RedisBloomUtil redisServiceUtil;
     @Autowired
     private BloomFilterHelper bloomFilterHelper;
 

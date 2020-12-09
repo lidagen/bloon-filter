@@ -1,12 +1,8 @@
 package com.example.bloom.config;
 
-import com.example.bloom.bloom.BloomFilterHelper;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Charsets;
-import com.google.common.hash.Funnel;
-import com.google.common.hash.Funnels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -42,9 +38,5 @@ public class RedisTemplateConfig {
         return redisTemplate;
     }
 
-    @Bean
-    public BloomFilterHelper<String> initBloomFilterHelper() {
-        return new BloomFilterHelper<>((Funnel<String>) (from, into) -> into.putString(from, Charsets.UTF_8).putString(from, Charsets.UTF_8), 1000000, 0.01);
-    }
 
 }

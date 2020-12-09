@@ -1,10 +1,9 @@
 package com.example.bloom.config;
 
 import com.example.bloom.bean.User;
-import com.example.bloom.bloom.BloomFilterHelper;
-import com.example.bloom.service.UserService;
-import com.example.bloom.util.RedisServiceUtil;
 import com.google.common.collect.Lists;
+import com.pri.tool.commonredis.bloom.BloomFilterHelper;
+import com.pri.tool.commonredis.bloom.RedisBloomUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -27,7 +26,7 @@ public class DatePreheating implements InitializingBean {
 
     public static List<User> USER_LIST;
     @Autowired
-    private RedisServiceUtil redisServiceUtil;
+    private RedisBloomUtil redisServiceUtil;
 
     @Override
     public void afterPropertiesSet() throws Exception {

@@ -25,4 +25,12 @@ public class BloomController {
     }
 
 
+    @RequestMapping(value = "/all", method = RequestMethod.POST)
+    public Object invoiceCountCheck() {
+
+        return "success";
+    }
+
+
+
 }
