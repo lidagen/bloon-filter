@@ -22,7 +22,7 @@ public class BloomController {
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
     public Object invoiceCountCheck(Long id) {
 
-        User userById = userService.getUserById(1L);
+        User userById = userService.getUserById(id);
         return userById;
     }
 
