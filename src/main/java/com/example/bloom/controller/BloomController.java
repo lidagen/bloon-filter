@@ -2,6 +2,7 @@ package com.example.bloom.controller;
 
 import com.example.bloom.bean.User;
 import com.example.bloom.service.UserService;
+import com.pri.tool.commonredis.token.annotation.NoRepeat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,8 @@ public class BloomController {
 
     @RequestMapping(value = "/getUser", method = RequestMethod.POST)
     public Object invoiceCountCheck(Long id) {
-        User userById = userService.getUserById(id);
+
+        User userById = userService.getUserById(1L);
         return userById;
     }
 
@@ -28,6 +30,14 @@ public class BloomController {
     @RequestMapping(value = "/all", method = RequestMethod.POST)
     public Object invoiceCountCheck() {
 
+        return "success";
+    }
+
+
+    @RequestMapping(value = "/token", method = RequestMethod.POST)
+    @NoRepeat
+    public Object token() {
+        System.out.println(1);
         return "success";
     }
 
